@@ -1,15 +1,12 @@
-class_name State 
-extends Node
+class_name StateIdle 
+extends State
 
-## Stores a refernce to the player that this State belongs to
-static var player : Player
+@onready var walk: State = $"../Walk"
 
-
-func _ready():
-	pass
 
 ## What happens when the player enters this state
 func enter() -> void:
+	player.update_animation("idle")
 	pass
 
 ## What happens when the player exits this state
@@ -18,6 +15,9 @@ func exit() -> void:
 
 ## What happens during the _process update in this state
 func process( _delta : float) -> State:
+	if player.direction != Vector2.ZERO:
+		return walk
+	player.velocity = Vector2.ZERO
 	return null
 
 ## What happens during the _physics_process update in this state

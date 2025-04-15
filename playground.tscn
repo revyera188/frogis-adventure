@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://33hnp85br2q6"]
+[gd_scene load_steps=3 format=3 uid="uid://33hnp85br2q6"]
 
 [ext_resource type="PackedScene" uid="uid://c1u5rkms7ug8g" path="res://Player/player.tscn" id="1_rupst"]
+[ext_resource type="PackedScene" uid="uid://cgwjftc1k252u" path="res://TileMap/Sprites/ground_tiles.tscn" id="1_wt17y"]
 
 [node name="Playground" type="Node2D"]
+
+[node name="GroundTiles" parent="." instance=ExtResource("1_wt17y")]
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
 position = Vector2(224, 127)

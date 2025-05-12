@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1u5rkms7ug8g"]
+[gd_scene load_steps=20 format=3 uid="uid://c1u5rkms7ug8g"]
 
 [ext_resource type="Script" uid="uid://cxl1lqutig8vq" path="res://Player/Scripts/player.gd" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://c4ftpwlnf672m" path="res://Player/Sprites/frogi-spritesheet-attack.png" id="2_k53q1"]
 [ext_resource type="Script" uid="uid://53xeyo3xh4xm" path="res://Player/Scripts/player_state_machine.gd" id="3_btcbx"]
-[ext_resource type="Texture2D" uid="uid://c2d13sawdx5xw" path="res://Player/Sprites/frogi-spritesheet.png" id="3_fhl08"]
 [ext_resource type="Script" uid="uid://cim2ajh32unnh" path="res://Player/Scripts/state_idle.gd" id="4_gwnis"]
 [ext_resource type="Script" uid="uid://kv20h3glqaky" path="res://Player/Scripts/state_walk.gd" id="5_k53q1"]
+[ext_resource type="Script" uid="uid://cwychm2oaj65o" path="res://Player/Scripts/state_attack.gd" id="6_fhl08"]
+[ext_resource type="AudioStream" uid="uid://dkqibiianqdbl" path="res://Player/Audio/fr-ribbit.wav" id="7_vtle1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wt17y"]
 radius = 5.09902
@@ -22,6 +24,54 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5htga"]
+resource_name = "attack_down"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_gu6f8"]
+resource_name = "attack_side"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_p5o4e"]
+resource_name = "attack_up"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
 }
 
 [sub_resource type="Animation" id="Animation_k53q1"]
@@ -129,6 +179,9 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x3vf3"]
 _data = {
 &"RESET": SubResource("Animation_fhl08"),
+&"attack_down": SubResource("Animation_5htga"),
+&"attack_side": SubResource("Animation_gu6f8"),
+&"attack_up": SubResource("Animation_p5o4e"),
 &"idle_down": SubResource("Animation_k53q1"),
 &"idle_side": SubResource("Animation_x3vf3"),
 &"idle_up": SubResource("Animation_apopc"),
@@ -148,9 +201,9 @@ shape = SubResource("CircleShape2D_wt17y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -1)
-texture = ExtResource("3_fhl08")
+texture = ExtResource("2_k53q1")
 hframes = 8
-vframes = 2
+vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -166,4 +219,13 @@ script = ExtResource("4_gwnis")
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("5_k53q1")
 
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_fhl08")
+attack_sound = ExtResource("7_vtle1")
+
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio"]
+max_polyphony = 4

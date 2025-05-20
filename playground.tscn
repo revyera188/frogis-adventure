@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://33hnp85br2q6"]
+[gd_scene load_steps=4 format=3 uid="uid://33hnp85br2q6"]
 
 [ext_resource type="PackedScene" uid="uid://c1u5rkms7ug8g" path="res://Player/player.tscn" id="1_rupst"]
 [ext_resource type="PackedScene" uid="uid://cgwjftc1k252u" path="res://TileMap/ground_tiles.tscn" id="1_wt17y"]
+[ext_resource type="PackedScene" uid="uid://b2thmauyjd5kk" path="res://Props/Plants/leafy_plant.tscn" id="3_m8u5f"]
 
 [node name="Playground" type="Node2D"]
+y_sort_enabled = true
 
 [node name="GroundTiles" parent="." instance=ExtResource("1_wt17y")]
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
 position = Vector2(224, 127)
+
+[node name="LeafyPlant" parent="." instance=ExtResource("3_m8u5f")]
+position = Vector2(144, 145)

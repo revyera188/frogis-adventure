@@ -1,8 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://33hnp85br2q6"]
+[gd_scene load_steps=10 format=3 uid="uid://33hnp85br2q6"]
 
 [ext_resource type="PackedScene" uid="uid://c1u5rkms7ug8g" path="res://Player/player.tscn" id="1_rupst"]
 [ext_resource type="PackedScene" uid="uid://cgwjftc1k252u" path="res://TileMap/ground_tiles.tscn" id="1_wt17y"]
 [ext_resource type="PackedScene" uid="uid://b2thmauyjd5kk" path="res://Props/Plants/leafy_plant.tscn" id="3_m8u5f"]
+[ext_resource type="Script" uid="uid://b1lrsk2wtdp2s" path="res://Cameras/camera_manager.gd" id="4_is3ju"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_4bqqs"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_ynsuh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is3ju"]
+size = Vector2(7, 96)
+
+[sub_resource type="Resource" id="Resource_4bqqs"]
+script = ExtResource("6_ynsuh")
+duration = 1.0
+transition = 1
+ease = 2
+
+[sub_resource type="Resource" id="Resource_v7dth"]
+script = ExtResource("6_ynsuh")
+duration = 1.0
+transition = 0
+ease = 2
 
 [node name="Playground" type="Node2D"]
 y_sort_enabled = true
@@ -14,3 +32,33 @@ position = Vector2(224, 127)
 
 [node name="LeafyPlant" parent="." instance=ExtResource("3_m8u5f")]
 position = Vector2(144, 145)
+
+[node name="CameraManager" type="Node" parent="." node_paths=PackedStringArray("player", "Camera_Zone0", "Camera_Zone1")]
+script = ExtResource("4_is3ju")
+player = NodePath("../Player")
+Camera_Zone0 = NodePath("CameraNodes/zone0-1/PhantomCamera2D0")
+Camera_Zone1 = NodePath("CameraNodes/zone0-1/PhantomCamera2D1")
+
+[node name="CameraNodes" type="StaticBody2D" parent="CameraManager"]
+
+[node name="zone0-1" type="Area2D" parent="CameraManager/CameraNodes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraManager/CameraNodes/zone0-1"]
+position = Vector2(484.5, 198)
+shape = SubResource("RectangleShape2D_is3ju")
+
+[node name="PhantomCamera2D0" type="Node2D" parent="CameraManager/CameraNodes/zone0-1"]
+position = Vector2(249, 157)
+script = ExtResource("5_4bqqs")
+priority = 1
+tween_resource = SubResource("Resource_4bqqs")
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="PhantomCamera2D1" type="Node2D" parent="CameraManager/CameraNodes/zone0-1"]
+position = Vector2(543, 149)
+script = ExtResource("5_4bqqs")
+zoom = Vector2(1.5, 1.5)
+tween_resource = SubResource("Resource_v7dth")
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[connection signal="body_entered" from="CameraManager/CameraNodes/zone0-1" to="CameraManager" method="_on_zone_0_1_body_entered"]

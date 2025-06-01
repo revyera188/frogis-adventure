@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c1u5rkms7ug8g"]
+[gd_scene load_steps=25 format=3 uid="uid://c1u5rkms7ug8g"]
 
 [ext_resource type="Script" uid="uid://cxl1lqutig8vq" path="res://Player/Scripts/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://c4ftpwlnf672m" path="res://Player/Sprites/frogi-spritesheet-attack.png" id="2_k53q1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://wsjfmrbeh25p" path="res://Player/Scripts/player_interactions_host.gd" id="8_00tjw"]
 [ext_resource type="PackedScene" uid="uid://bc6oicoy7qrdw" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="8_od3ui"]
 [ext_resource type="Script" uid="uid://b071jceqlnplf" path="res://Player/Scripts/player_camera.gd" id="8_x3vf3"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="9_apopc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wt17y"]
 radius = 5.09902
@@ -230,8 +231,13 @@ script = ExtResource("6_fhl08")
 attack_sound = ExtResource("7_vtle1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-editor_draw_limits = true
 script = ExtResource("8_x3vf3")
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("9_apopc")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="Audio" type="Node2D" parent="."]
 

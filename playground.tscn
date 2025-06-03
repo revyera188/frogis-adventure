@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://33hnp85br2q6"]
+[gd_scene load_steps=16 format=3 uid="uid://33hnp85br2q6"]
 
 [ext_resource type="PackedScene" uid="uid://c1u5rkms7ug8g" path="res://Player/player.tscn" id="1_rupst"]
 [ext_resource type="PackedScene" uid="uid://cgwjftc1k252u" path="res://TileMap/ground_tiles.tscn" id="1_wt17y"]
 [ext_resource type="PackedScene" uid="uid://b2thmauyjd5kk" path="res://Props/Plants/leafy_plant.tscn" id="3_m8u5f"]
 [ext_resource type="Script" uid="uid://b1lrsk2wtdp2s" path="res://Cameras/camera_manager.gd" id="4_is3ju"]
-[ext_resource type="PackedScene" uid="uid://dlq8pa8dt4vuv" path="res://Props/Plants/leafy_plant_withered.tscn" id="4_v7dth"]
+[ext_resource type="PackedScene" uid="uid://byvef07ba3eci" path="res://Props/Plants/leafy_plant_withered.tscn" id="4_v7dth"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_4bqqs"]
-[ext_resource type="Script" uid="uid://cfimb4c0gf6hn" path="res://Props/Plants/leafy_plant_withered.gd" id="5_pi42a"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_ynsuh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is3ju"]
@@ -54,20 +53,15 @@ turbulence_influence_max = 0.3
 y_sort_enabled = true
 
 [node name="GroundTiles" parent="." instance=ExtResource("1_wt17y")]
-visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
-visible = false
 position = Vector2(224, 127)
 
 [node name="LeafyPlant" parent="." instance=ExtResource("3_m8u5f")]
-visible = false
 position = Vector2(147, 149)
 
 [node name="LeafyPlantWithered" parent="." instance=ExtResource("4_v7dth")]
-visible = false
-position = Vector2(256, 99)
-script = ExtResource("5_pi42a")
+position = Vector2(178, 113)
 
 [node name="CameraManager" type="Node" parent="." node_paths=PackedStringArray("player", "Camera_Zone0", "Camera_Zone1")]
 script = ExtResource("4_is3ju")
@@ -98,6 +92,7 @@ tween_resource = SubResource("Resource_v7dth")
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(226, 7)
 amount = 40
 lifetime = 10.0

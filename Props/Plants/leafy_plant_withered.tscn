@@ -1,37 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlq8pa8dt4vuv"]
+[gd_scene load_steps=4 format=3 uid="uid://byvef07ba3eci"]
 
-[ext_resource type="Texture2D" uid="uid://ca56ldjft5d6v" path="res://Props/Sprites/Leafyplant01.png" id="1_gd0yg"]
+[ext_resource type="PackedScene" uid="uid://b2thmauyjd5kk" path="res://Props/Plants/leafy_plant.tscn" id="1_gd0yg"]
 [ext_resource type="Shader" uid="uid://dr1f2xntfv11p" path="res://Props/Plants/leafy_plant_withered.gdshader" id="1_k4iwj"]
-[ext_resource type="PackedScene" uid="uid://crlomsq651j8" path="res://GeneralNodes/HitBox/hit_box.tscn" id="2_k4iwj"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7f7rh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4iwj"]
 shader = ExtResource("1_k4iwj")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_121na"]
-size = Vector2(9, 8.5)
+[node name="LeafyPlantWithered" instance=ExtResource("1_gd0yg")]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8prrf"]
-size = Vector2(9, 5)
-
-[node name="LeafyPlantWithered" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_7f7rh")
-texture = ExtResource("1_gd0yg")
-
-[node name="HitBox" parent="." instance=ExtResource("2_k4iwj")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-visible = false
-position = Vector2(0, 0.25)
-shape = SubResource("RectangleShape2D_121na")
-debug_color = Color(0.595104, 0.53453, 0.313404, 0.42)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-visible = false
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_8prrf")
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_k4iwj")
